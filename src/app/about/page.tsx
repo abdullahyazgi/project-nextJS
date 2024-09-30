@@ -1,9 +1,7 @@
 
 
 const About = () => {
-  return (
-    <div>About</div>
-  )
+  return <div className="fix-height">About</div>;
 }
 
 export default About

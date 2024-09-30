@@ -1,9 +1,7 @@
 
 
 const Home = () => {
-  return (
-    <div>Home</div>
-  )
+  return <div className="fix-height">Home</div>;
 }
 
 export default Home

@@ -25,3 +25,7 @@ body {
     text-wrap: balance;
   }
 }
+
+.fix-height {
+  min-height: calc(100vh - 150px);
+}

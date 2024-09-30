@@ -1,9 +1,7 @@
 
 
 const AdminDashboard = () => {
-  return (
-    <div>Admin Dashboard</div>
-  )
+  return <div className="fix-height">Admin Dashboard</div>;
 }
 
 export default AdminDashboard
