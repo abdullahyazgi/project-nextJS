@@ -1,8 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
-import { articles } from "@/utils/data";
-import { Article } from "@/utils/types";
 import { createArticleSchema } from "@/utils/validationSchemas";
 import { CreateArticleDto } from "@/utils/dtos";
+import { Article } from "@prisma/client";
+import  prisma  from "@/utils/db"; 
 
 /**
  *  @method GET
@@ -10,10 +10,17 @@ import { CreateArticleDto } from "@/utils/dtos";
  *  @desc Get All Articles
  *  @access public
  */
-export function GET(request: NextRequest) {
-    return NextResponse.json(articles, {status: 200});
+export async function GET(request: NextRequest) {
+ try {
+     const articles = await prisma.article.findMany();
+     return NextResponse.json(articles, { status: 200 });
+ } catch (error) {
+     return NextResponse.json(
+       { message: "internal server error" },
+       { status: 500 }
+     );
+ }
 }
-
 
 /**
  *  @method POST
@@ -22,23 +29,29 @@ export function GET(request: NextRequest) {
  *  @access public
  */
 export async function POST(request: NextRequest) {
+  try {
     const body = (await request.json()) as CreateArticleDto;
 
-
-
     const validation = createArticleSchema.safeParse(body);
-    if(!validation.success) {
-        return NextResponse.json({ message: validation.error.errors[0].message }, { status: 400 });
-        
+    if (!validation.success) {
+      return NextResponse.json(
+        { message: validation.error.errors[0].message },
+        { status: 400 }
+      );
     }
 
-    const newArticl: Article = {
+    const newArticl: Article = await prisma.article.create({
+      data: {
         title: body.title,
-        body: body.body,
-        id: articles.length + 1,
-        userId: 200,
-    }
+        description: body.description,
+      },
+    });
 
-    articles.push(newArticl);
-    return NextResponse.json(newArticl, {status: 201});
+    return NextResponse.json(newArticl, { status: 201 });
+  } catch (error) {
+    return NextResponse.json(
+        { message: "internal server error" },
+        { status: 500 }
+    )
+  }
 }
