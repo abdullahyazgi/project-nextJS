@@ -5,5 +5,11 @@ export interface CreateArticleDto {
 
 export interface UpdateArticleDto {
   title?: string;
-  body?: string;
+  description?: string;
+}
+
+export interface RegisterDto {
+  username: string;
+  email: string;
+  password: string;
 }
