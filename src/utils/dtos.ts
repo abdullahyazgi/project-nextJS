@@ -8,8 +8,13 @@ export interface UpdateArticleDto {
   description?: string;
 }
 
-export interface RegisterDto {
+export interface RegisterUserDto {
   username: string;
+  email: string;
+  password: string;
+}
+
+export interface LoginUserDto {
   email: string;
   password: string;
 }
