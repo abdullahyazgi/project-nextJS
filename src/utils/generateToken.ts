@@ -8,4 +8,6 @@ export function generateJWT(jwtPayload: JWTPayload): string {
   const token = jwt.sign(jwtPayload, PrivateKey, {
     expiresIn: "30d",
   });
+
+  return token;
 }
