@@ -1,5 +1,5 @@
 import prisma from "@/utils/db";
-import { RegisterUeDto } from "@/utils/dtos";
+import { RegisterUserDto } from "@/utils/dtos";
 import { registerSchema } from "@/utils/validationSchemas";
 import { NextResponse, NextRequest } from "next/server";
 import bcrypt from "bcryptjs";
@@ -13,7 +13,7 @@ import { setCookie } from "@/utils/generateToken";
  */
 export async function POST(request: NextRequest) {
     try {
-        const body = await request.json() as RegisterDto;
+        const body = (await request.json()) as RegisterUserDto;
         const validation = registerSchema.safeParse(body);
         if(!validation.success) {
             return NextResponse.json({ message: validation.error.errors[0].message }, { status:400 })
@@ -44,9 +44,9 @@ export async function POST(request: NextRequest) {
         });
 
         const cookie = setCookie({
-          id: newUser.id,
-          username: newUser.username,
-          isAdmin: newUser.isAdmin,
+            id: newUser.id,
+            username: newUser.username,
+            isAdmin: newUser.isAdmin,
         });
 
         return NextResponse.json(
