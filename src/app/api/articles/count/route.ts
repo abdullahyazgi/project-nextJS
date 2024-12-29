@@ -3,7 +3,7 @@ import prisma from "@/utils/db";
 
 /**
  *  @method GET
- *  @route ~/api/articles/search?searchText=value
+ *  @route ~/api/articles/count
  *  @desc Get Articles By searchText
  *  @access public
  */
