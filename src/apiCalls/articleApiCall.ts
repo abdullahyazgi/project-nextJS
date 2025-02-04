@@ -6,7 +6,7 @@ import { SingleArticle } from "@/utils/types";
 // Get articles based on pageNumber
 export async function getArticles(pageNumber: string | undefined): Promise<Article[]> {
   const response = await fetch(
-    `http://localhost:3000/api/articles?pageNumber=${pageNumber}`
+    `${DOMAIN}/api/articles?pageNumber=${pageNumber}`
   );
   if (!response.ok) {
     throw new Error(`Failed to fetch articles`);
@@ -17,9 +17,7 @@ export async function getArticles(pageNumber: string | undefined): Promise<Artic
 
 // Get articles count
 export async function getArticlesCount(): Promise<number> {
-  const response = await fetch(
-    `http://localhost:3000/api/articles/count`
-  );
+  const response = await fetch(`${DOMAIN}/api/articles/count`);
   if (!response.ok) {
     throw new Error(`Failed to get articles count`);
   }
@@ -31,7 +29,7 @@ export async function getArticlesCount(): Promise<number> {
 // Get articles based on searchText
 export async function getArticlesBasedOnSearch(searchText: string): Promise<Article[]> {
   const response = await fetch(
-    `http://localhost:3000/api/articles/search?searchText=${searchText}`
+    `${DOMAIN}/api/articles/search?searchText=${searchText}`
   );
   if (!response.ok) {
     throw new Error(`Failed to fetch articles`);

@@ -3,7 +3,11 @@ import Link from "next/link";
 import styles from "./header.module.css";
 import { useState } from "react";
 
-const NavBar = () => {
+interface NavbarProps {
+  isAdmin: boolean;
+}
+
+const NavBar = ({ isAdmin }: NavbarProps) => {
   const [toggle, setToggle] = useState(false);
 
   return (
@@ -33,13 +37,6 @@ const NavBar = () => {
           <Link
             onClick={() => setToggle(false)}
             className={styles.navLink}
-            href="/about"
-          >
-            About
-          </Link>
-          <Link
-            onClick={() => setToggle(false)}
-            className={styles.navLink}
             href="/articles?pageNumber=1"
           >
             Articles
@@ -47,10 +44,19 @@ const NavBar = () => {
           <Link
             onClick={() => setToggle(false)}
             className={styles.navLink}
-            href="/admin"
+            href="/about"
           >
-            Admin Dashboard
+            About
           </Link>
+          {isAdmin && (
+            <Link
+              onClick={() => setToggle(false)}
+              className={styles.navLink}
+              href="/admin"
+            >
+              Admin Dashboard
+            </Link>
+          )}
         </ul>
       </div>
     </nav>
