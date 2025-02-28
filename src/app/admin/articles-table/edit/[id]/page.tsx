@@ -3,6 +3,7 @@ import { verifyTokenForPage } from '@/utils/verifyToken';
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 import EditArticleForm from './EditArticleForm';
+import { Article } from '@prisma/client';
 
 
 interface EditArticlePageProps {
