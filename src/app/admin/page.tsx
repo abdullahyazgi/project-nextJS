@@ -1,26 +1,16 @@
-import AddArticleForm from "./AddArticleForm";
-import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
-import { verifyTokenForPage } from "@/utils/verifyToken";
+import Link from "next/link";
 
-
-const AdminDashboard = () => {
-  const token = cookies().get("jwtToken")?.value;
-  if(!token) redirect("/");
-
-  const payload = verifyTokenForPage(token);
-  if(payload?.isAdmin === false) redirect("/");
-
+const HomeAdminPage = () => {
   return (
-  <div className="fix-height flex items-center justify-center px-5 lg:px-20">
-      <div className="shadow bg-purple-200 rounded w-full">
-        <h2 className="text-xl lg:text-2xl text-gr700 font-semibold mb-4">
-          Add New Article
-        </h2>
-        <AddArticleForm/>
-      </div>
-  </div>
-  )
+    <ul className="mt-10 flex items-center justify-center flex-col">
+      <Link href="/admin/add-article-form">
+        <span>Add new article</span>
+      </Link>
+      <Link href="/admin/articles-table?pageNumber=1">
+        <span>Go to Articles</span>
+      </Link>
+    </ul>
+  );
 };
 
-export default AdminDashboard
+export default HomeAdminPage;

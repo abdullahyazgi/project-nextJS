@@ -16,6 +16,13 @@ const AdminSidebar = () => {
       <ul className="mt-10 flex items-center justify-center flex-col lg:items-start">
         <Link
           className="flex items-center text-xl mb-5 lg:border-b border-gray-300 hover:border-yellow-200 hover:text-yellow-200 transition"
+          href="/admin/add-article-form"
+        >
+          <MdOutlineArticle className="me-1" />
+          <span className="hidden lg:block">add article</span>
+        </Link>
+        <Link
+          className="flex items-center text-xl mb-5 lg:border-b border-gray-300 hover:border-yellow-200 hover:text-yellow-200 transition"
           href="/admin/articles-table?pageNumber=1"
         >
           <MdOutlineArticle className="me-1" />
